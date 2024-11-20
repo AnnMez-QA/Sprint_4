@@ -1,17 +1,26 @@
+package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import java.util.List;
+
+
+
 
 public class MainPage extends BasePage {
 
-    private final String clickButton = ".//div[@class='accordion__button']";
-    private final String answers = ".//div[@class='accordion__panel']";
     private final String cookieAcceptButton = ".//button[@id='rcc-confirm-button']";
-    private final String allQuestions = ".//div[@class='accordion__item']";
     private final String upOrderButton = ".//button[@class='Button_Button__ra12g']";
     private final String middleOrderButton = ".//button[@class='Button_Button__ra12g Button_Middle__1CSJM']";
+    private String question = ".//div[@id = 'accordion__heading-%d']";
+    private String answer = ".//div[@data-accordion-component = 'AccordionItemPanel']/p[text()='%s']";
 
+   public void getClickOnQuestion (int questionIndex) {
+        driver.findElement(By.xpath(String.format(question, questionIndex))).click();
+   }
+
+   public String getTextOfAnswer (String answerValue) {
+       return driver.findElement(By.xpath(String.format(answer, answerValue))).getText();
+   }
 
 
     public MainPage(WebDriver driver) {
@@ -24,24 +33,6 @@ public class MainPage extends BasePage {
 
    }
 
-    public List<WebElement> getQuestions() {
-        return driver.findElements(By.xpath(allQuestions));
-    }
-
-
-    public String clickAndGetText (WebElement question) {
-        WebElement arrow = question.findElement(By.xpath(clickButton));
-        arrow.click();
-
-        WebElement answer = question.findElement(By.xpath(answers));
-        return answer.getText();
-
-    }
-
-    public boolean isAnswerDisplayed(WebElement question) {
-        WebElement answer = question.findElement(By.xpath(answers));
-        return answer.isDisplayed();
-    }
 
     public void clickOnUpOrderButton () {
         driver.findElement(By.xpath(upOrderButton)).click();

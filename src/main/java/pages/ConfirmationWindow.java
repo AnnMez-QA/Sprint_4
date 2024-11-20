@@ -1,3 +1,6 @@
+package pages;
+
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,6 +31,12 @@ public class ConfirmationWindow extends BasePage{
     public void waitForTextOfSuccessToBeVisible() {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.visibilityOf(successConfirmationText));
+    }
+
+    public void verifyOrderSuccess() {
+        // Проверяем, что элемент доступен и видим
+        Assert.assertTrue("Сообщение о завершении заказа не отображается!",
+                successConfirmationText.isDisplayed());
     }
 
     public void clickOnYesButton(){
