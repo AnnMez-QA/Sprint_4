@@ -1,5 +1,4 @@
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,8 +26,8 @@ public class FaqTest {
 
     @Before
     public void setUp() {
-        driver = new FirefoxDriver(); // для Firefox
-        //driver = new ChromeDriver(); // для Chrome
+        //driver = new FirefoxDriver(); // для Firefox
+        driver = new ChromeDriver(); // для Chrome
         driver.get("https://qa-scooter.praktikum-services.ru/");
     }
 

@@ -23,21 +23,23 @@ public class OrderTest {
     private String address;
     private String number;
     private String comment;
+    private String nameOfOrderButton;
 
-    public OrderTest (String name, String surname, String address, String number, String comment) {
+    public OrderTest (String name, String surname, String address, String number, String comment, String nameOfOrderButton) {
         this.name = name;
         this.surname = surname;
         this.address = address;
         this.number = number;
         this.comment = comment;
+        this.nameOfOrderButton = nameOfOrderButton;
 
 
     }
 
     @Before
     public void setUp() {
-        driver = new FirefoxDriver(); // для Firefox
-        //driver = new ChromeDriver(); // для Chrome
+        //driver = new FirefoxDriver(); // для Firefox
+        driver = new ChromeDriver(); // для Chrome
         driver.get("https://qa-scooter.praktikum-services.ru/");
     }
 
@@ -45,8 +47,8 @@ public class OrderTest {
     @Parameterized.Parameters
     public static Object[][] testData() {
         return new Object[][] {
-                { "Пуп", "Иванович", "ул.Дежурная, 4", "89056778999", "привезите быстро"},
-                { "Инесса", "Гнидова", "пр.Буденного 12", "89056778991", "не звоните"},
+                { "Пуп", "Иванович", "ул.Дежурная, 4", "89056778999", "привезите быстро", "Вверхняя кнопка Заказать"},
+                { "Инесса", "Гнидова", "пр.Буденного 12", "89056778991", "не звоните", "Нижняя кнопка Заказать"},
         };
     }
 
@@ -54,9 +56,9 @@ public class OrderTest {
     public void orderTest () {
         MainPage objMainPage = new MainPage(driver);
 
-        if ("привезите быстро".equals(comment)) {
+        if ("Вверхняя кнопка Заказать".equals(nameOfOrderButton)) {
             objMainPage.clickOnUpOrderButton();
-        } else if ("не звоните".equals(comment)) {
+        } else if ("Нижняя кнопка Заказать".equals(nameOfOrderButton)) {
             objMainPage.acceptCookie();
             WebElement element = driver.findElement(By.cssSelector(".Button_Button__ra12g.Button_Middle__1CSJM"));
             ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
